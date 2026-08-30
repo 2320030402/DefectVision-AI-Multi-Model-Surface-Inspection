@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DefectVision AI — About</title>
+  <link rel="stylesheet" href="css/style.css?v=20260830">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <a class="brand" href="index.html">
+    <span class="brand-mark">QC · 01</span>
+
+    <div class="brand-text">
+      <h1>DefectVision AI</h1>
+      <small>Multi-Model Surface Inspection</small>
+    </div>
+  </a>
+
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="detection.html">Detection</a>
+    <a class="active" href="about.html">About</a>
+  </nav>
+
+  <div class="status">
+    <span id="statusDot" class="dot"></span>
+    <span id="statusText">Checking backend…</span>
+  </div>
+
+</header>
+
+
+<main class="container page">
+
+  <div class="eyebrow">SYSTEM OVERVIEW</div>
+
+  <h1 class="page-title">About DefectVision AI</h1>
+
+  <p class="page-subtitle about-intro">
+    An industrial surface inspection system combining automatic multi-model
+    comparison, defect classification, independent anomaly screening,
+    explainable AI, evidence-based validation, spatial analysis, and
+    inspection reporting.
+  </p>
+
+
+  <!-- SYSTEM DESCRIPTION -->
+
+  <div class="about-card">
+
+    <h2>What the system does</h2>
+
+    <p>
+      The application accepts an industrial surface image and automatically
+      evaluates the same image using three registered CNN models:
+      ResNet18, MobileNetV2, and Custom CNN.
+    </p>
+
+    <p>
+      The model outputs are compared automatically and the strongest model
+      result is selected for the remaining inspection pipeline. The selected
+      model then performs defect classification and provides the confidence
+      distribution.
+    </p>
+
+    <p>
+      The inspection station also produces an independent visual anomaly
+      screen, severity and priority assessment, Grad-CAM model attention,
+      controlled evidence-preserved and evidence-removed views, a spatial
+      evidence profile, and a final inspection report.
+    </p>
+
+  </div>
+
+
+  <!-- ANOMALY SCREENING -->
+
+  <div class="about-card">
+
+    <h2>Why anomaly screening matters</h2>
+
+    <p>
+      The anomaly layer is independent of the classifier. It searches for
+      locally unusual texture and gradient patterns, allowing the inspection
+      workflow to flag unusual regions even when a classifier is confident
+      in a known class.
+    </p>
+
+    <p>
+      <strong style="color:var(--accent)">Important:</strong>
+      the anomaly score is a screening signal, not a calibrated probability
+      of defectiveness.
+    </p>
+
+  </div>
+
+
+  <!-- PROCESSING PIPELINE -->
+
+  <div class="about-card">
+
+    <h2>Processing pipeline</h2>
+
+    <div class="pipeline">
+
+      <!-- 01 -->
+
+      <div class="pipeline-item">
+        <b>01 · INPUT</b>
+
+        <strong>Surface image</strong>
+
+        <span>
+          Upload a JPG or PNG industrial surface image for inspection.
+        </span>
+      </div>
+
+
+      <!-- 02 -->
+
+      <div class="pipeline-item">
+        <b>02 · COMPARE</b>
+
+        <strong>Multi-model comparison</strong>
+
+        <span>
+          The same image is automatically evaluated by ResNet18,
+          MobileNetV2, and Custom CNN.
+        </span>
+      </div>
+
+
+      <!-- 03 -->
+
+      <div class="pipeline-item">
+        <b>03 · SELECT</b>
+
+        <strong>Best model selection</strong>
+
+        <span>
+          The three model predictions are compared and the strongest
+          model result is automatically selected.
+        </span>
+      </div>
+
+
+      <!-- 04 -->
+
+      <div class="pipeline-item">
+        <b>04 · CLASSIFY</b>
+
+        <strong>Defect classification</strong>
+
+        <span>
+          The selected model predicts one of six trained defect classes
+          and provides the complete confidence distribution.
+        </span>
+      </div>
+
+
+      <!-- 05 -->
+
+      <div class="pipeline-item">
+        <b>05 · ANOMALY</b>
+
+        <strong>Visual anomaly screening</strong>
+
+        <span>
+          Local texture residual and gradient information are analyzed
+          to highlight unusual surface patterns.
+        </span>
+      </div>
+
+
+      <!-- 06 -->
+
+      <div class="pipeline-item">
+        <b>06 · SEVERITY</b>
+
+        <strong>Severity &amp; priority assessment</strong>
+
+        <span>
+          Visual evidence, anomaly response, affected area, and supporting
+          signals are combined into an inspection-priority assessment.
+        </span>
+      </div>
+
+
+      <!-- 07 -->
+
+      <div class="pipeline-item">
+        <b>07 · EXPLAIN</b>
+
+        <strong>Grad-CAM</strong>
+
+        <span>
+          Grad-CAM visualizes the regions that most influenced the selected
+          model prediction.
+        </span>
+      </div>
+
+
+      <!-- 08 -->
+
+      <div class="pipeline-item">
+        <b>08 · VALIDATE</b>
+
+        <strong>Evidence consistency</strong>
+
+        <span>
+          Highlighted evidence is preserved and suppressed to measure
+          how strongly the prediction depends on that evidence.
+        </span>
+      </div>
+
+
+      <!-- 09 -->
+
+      <div class="pipeline-item">
+        <b>09 · PROFILE</b>
+
+        <strong>Spatial evidence analysis</strong>
+
+        <span>
+          The system summarizes evidence pattern, location, affected area,
+          and orientation.
+        </span>
+      </div>
+
+
+      <!-- 10 -->
+
+      <div class="pipeline-item">
+        <b>10 · REPORT</b>
+
+        <strong>Export inspection report</strong>
+
+        <span>
+          The final report contains the selected best model, prediction,
+          confidence, anomaly analysis, evidence results, spatial profile,
+          and visual inspection evidence.
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TEAM -->
+
+  <div class="about-card">
+
+    <h2>Team members</h2>
+
+    <div class="team-grid">
+
+      <div class="team-card">
+
+        <div class="initial">TN</div>
+
+        <h3>T. Nishkha</h3>
+
+        <div class="id">2320030139</div>
+
+        <p>
+          <strong>Frontend &amp; UI Developer</strong><br>
+          Responsible for the inspection interface, responsive layouts,
+          interaction flow, result visualization, and user-facing
+          presentation.
+        </p>
+
+      </div>
+
+
+      <div class="team-card">
+
+        <div class="initial">PA</div>
+
+        <h3>Plv. Abhiram</h3>
+
+        <div class="id">2320030294</div>
+
+        <p>
+          <strong>Backend &amp; API Developer</strong><br>
+          Responsible for FastAPI services, image upload handling,
+          model serving, API integration, and backend reliability.
+        </p>
+
+      </div>
+
+
+      <div class="team-card">
+
+        <div class="initial">SR</div>
+
+        <h3>G. SaiAbhiRam Reddy</h3>
+
+        <div class="id">2320030402</div>
+
+        <p>
+          <strong>Machine Learning &amp; Computer Vision Developer</strong><br>
+          Responsible for trained classifiers, Grad-CAM, anomaly screening,
+          evidence analysis, and computer-vision inference logic.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<footer>
+  DefectVision AI · Multi-Model Surface Inspection ·
+  Explainable local inspection platform
+</footer>
+
+
+<script src="js/app.js?v=20260830"></script>
+
+</body>
+</html>

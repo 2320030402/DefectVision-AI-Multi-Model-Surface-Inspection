@@ -1,0 +1,2049 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
+  <title>
+    DefectVision AI — Multi-Model Surface Inspection
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <style>
+
+    /* =========================================================
+       GLOBAL
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      background: #050a0f;
+      color: #e9eef5;
+
+      font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .topbar {
+
+      width: 100%;
+      height: 74px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 34px;
+
+      gap: 28px;
+
+      background: #070c12;
+
+      border-bottom:
+        1px solid #263443;
+
+      position: relative;
+
+      z-index: 20;
+    }
+
+
+    .brand {
+
+      min-width: 330px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 14px;
+    }
+
+
+    .brand-mark {
+
+      height: 38px;
+
+      padding:
+        0 14px;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid #f5a623;
+
+      border-radius: 6px;
+
+      color: #ffb12b;
+
+      font:
+        700 12px/1 monospace;
+
+      letter-spacing:
+        1.5px;
+
+      white-space:
+        nowrap;
+    }
+
+
+    .brand-text h1 {
+
+      margin: 0;
+
+      font-size: 19px;
+
+      line-height: 1.1;
+
+      font-weight: 700;
+    }
+
+
+    .brand-text small {
+
+      display: block;
+
+      margin-top: 5px;
+
+      color: #62758b;
+
+      font:
+        10px monospace;
+
+      letter-spacing:
+        .5px;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .nav {
+
+      flex: 1;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+    }
+
+
+    .nav a {
+
+      padding:
+        10px 18px;
+
+      border:
+        1px solid transparent;
+
+      border-radius: 5px;
+
+      color: #71839a;
+
+      font:
+        11px 700 monospace;
+
+      letter-spacing:
+        1px;
+
+      text-transform:
+        uppercase;
+
+      transition:
+        .2s ease;
+    }
+
+
+    .nav a:hover,
+    .nav a.active {
+
+      color: #ffb12b;
+
+      background:
+        #101a24;
+
+      border-color:
+        #27394a;
+    }
+
+
+    /* =========================================================
+       BACKEND STATUS
+       ========================================================= */
+
+    .status {
+
+      min-width: 190px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: flex-end;
+
+      gap: 8px;
+
+      color: #71839a;
+
+      font:
+        10px monospace;
+
+      white-space:
+        nowrap;
+    }
+
+
+    .dot {
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background:
+        #20d68a;
+
+      box-shadow:
+        0 0 10px
+        rgba(32,214,138,.65);
+    }
+
+
+    /* =========================================================
+       MAIN CONTAINER
+       ========================================================= */
+
+    .home-container {
+
+      width:
+        min(
+          1180px,
+          calc(100% - 64px)
+        );
+
+      margin:
+        0 auto;
+    }
+
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+
+      min-height:
+        590px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      align-items:
+        center;
+
+      gap:
+        48px;
+
+      padding:
+        64px 0 54px;
+    }
+
+
+    .hero-copy {
+      min-width: 0;
+    }
+
+
+    .eyebrow {
+
+      margin-bottom:
+        18px;
+
+      color:
+        #ffae27;
+
+      font:
+        700 11px monospace;
+
+      letter-spacing:
+        1.8px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .hero-title {
+
+      margin:
+        0;
+
+      font-size:
+        clamp(
+          48px,
+          5.2vw,
+          72px
+        );
+
+      line-height:
+        .98;
+
+      letter-spacing:
+        -3px;
+
+      font-weight:
+        800;
+    }
+
+
+    .hero-title span {
+      color:
+        #ffae27;
+    }
+
+
+    .hero-description {
+
+      max-width:
+        590px;
+
+      margin:
+        28px 0 0;
+
+      color:
+        #7ca8d7;
+
+      font-size:
+        15px;
+
+      line-height:
+        1.75;
+    }
+
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .hero-actions {
+
+      display:
+        flex;
+
+      gap:
+        12px;
+
+      margin-top:
+        28px;
+    }
+
+
+    .btn {
+
+      min-height:
+        44px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        10px;
+
+      padding:
+        0 20px;
+
+      border-radius:
+        6px;
+
+      font:
+        700 11px monospace;
+
+      letter-spacing:
+        1px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .btn.primary {
+
+      color:
+        #111;
+
+      background:
+        #ffad29;
+
+      border:
+        1px solid #ffad29;
+    }
+
+
+    .btn.primary:hover {
+      background:
+        #ffc052;
+    }
+
+
+    .btn.secondary {
+
+      color:
+        #e5edf5;
+
+      background:
+        #0d1721;
+
+      border:
+        1px solid #2b3c4e;
+    }
+
+
+    .btn.secondary:hover {
+
+      border-color:
+        #60758b;
+    }
+
+
+    /* =========================================================
+       KPI CARDS
+       ========================================================= */
+
+    .hero-kpis {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        12px;
+
+      margin-top:
+        30px;
+    }
+
+
+    .kpi-card {
+
+      min-height:
+        128px;
+
+      padding:
+        20px;
+
+      background:
+        #0c151f;
+
+      border:
+        1px solid #2a3a4b;
+
+      border-radius:
+        7px;
+    }
+
+
+    .kpi-label {
+
+      color:
+        #6e8298;
+
+      font:
+        9px 700 monospace;
+
+      letter-spacing:
+        1.5px;
+    }
+
+
+    .kpi-value {
+
+      margin-top:
+        14px;
+
+      color:
+        #edf3f8;
+
+      font-size:
+        20px;
+
+      line-height:
+        1.15;
+
+      font-weight:
+        800;
+    }
+
+
+    .kpi-description {
+
+      margin-top:
+        10px;
+
+      color:
+        #7891ab;
+
+      font-size:
+        10px;
+    }
+
+
+    /* =========================================================
+       SCANNER CARD
+       ========================================================= */
+
+    .hero-visual {
+      width:
+        100%;
+    }
+
+
+    .scanner-card {
+
+      overflow:
+        hidden;
+
+      background:
+        #0c151f;
+
+      border:
+        1px solid #2b3c4d;
+
+      border-radius:
+        9px;
+
+      box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.22);
+    }
+
+
+    .scanner-header,
+    .scanner-footer {
+
+      height:
+        48px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      padding:
+        0 18px;
+
+      color:
+        #9db0c4;
+
+      font:
+        10px monospace;
+
+      letter-spacing:
+        .4px;
+    }
+
+
+    .scanner-header {
+
+      border-bottom:
+        1px solid #263746;
+    }
+
+
+    .scanner-live {
+      color:
+        #20d68a;
+    }
+
+
+    /* =========================================================
+       SCANNER AREA
+       ========================================================= */
+
+    .scanner-area {
+
+      position:
+        relative;
+
+      height:
+        400px;
+
+      overflow:
+        hidden;
+
+      background:
+        #0b1722;
+
+      isolation:
+        isolate;
+    }
+
+
+    /* =========================================================
+       SCANNER GRID
+       ========================================================= */
+
+    .scanner-grid {
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      z-index:
+        0;
+
+      background-image:
+
+        linear-gradient(
+          rgba(80,110,135,.14) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(80,110,135,.14) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        48px 48px;
+    }
+
+
+    /* =========================================================
+       FIXED HEAT SPOT
+       
+       IMPORTANT:
+       The heat spot DOES NOT MOVE.
+       It stays in the center.
+       ========================================================= */
+
+    .scanner-heat {
+
+      position:
+        absolute;
+
+      z-index:
+        2;
+
+      width:
+        220px;
+
+      height:
+        220px;
+
+      left:
+        50%;
+
+      top:
+        50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius:
+        50%;
+
+      background:
+
+        radial-gradient(
+          circle,
+
+          rgba(255,137,43,.98)
+          0%,
+
+          rgba(255,177,45,.92)
+          16%,
+
+          rgba(113,213,137,.70)
+          37%,
+
+          rgba(62,157,185,.30)
+          58%,
+
+          transparent
+          73%
+        );
+
+      filter:
+        blur(3px);
+
+      pointer-events:
+        none;
+    }
+
+
+    /* =========================================================
+       SCAN LINE
+       
+       ONLY THIS LINE MOVES.
+       
+       TOP
+        ↓
+       BOTTOM
+        ↓
+       TOP
+       
+       ========================================================= */
+
+    .scanner-scanline {
+
+      position:
+        absolute;
+
+      z-index:
+        4;
+
+      left:
+        0;
+
+      right:
+        0;
+
+      top:
+        0;
+
+      height:
+        2px;
+
+      background:
+        #ffb229;
+
+      box-shadow:
+
+        0 0 8px
+        rgba(255,178,41,.75),
+
+        0 0 18px
+        rgba(255,178,41,.30);
+
+      transform:
+        translateY(-50%);
+
+      animation:
+        scannerLineMove
+        3.5s
+        ease-in-out
+        infinite
+        alternate;
+    }
+
+
+    /* =========================================================
+       SCAN LINE ANIMATION
+       ========================================================= */
+
+    @keyframes scannerLineMove {
+
+      0% {
+        top:
+          0%;
+      }
+
+      100% {
+        top:
+          100%;
+      }
+
+    }
+
+
+    /* =========================================================
+       FIXED CENTER TARGET
+       
+       IMPORTANT:
+       Target does NOT move.
+       ========================================================= */
+
+    .scanner-center {
+
+      position:
+        absolute;
+
+      z-index:
+        5;
+
+      left:
+        50%;
+
+      top:
+        50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      pointer-events:
+        none;
+    }
+
+
+    /* =========================================================
+       TARGET RING
+       ========================================================= */
+
+    .target-ring {
+
+      width:
+        124px;
+
+      height:
+        124px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border:
+        1px solid
+        rgba(255,177,40,.9);
+
+      border-radius:
+        50%;
+
+      box-shadow:
+        0 0 25px
+        rgba(255,174,38,.18);
+
+      animation:
+        targetPulse
+        1.8s
+        ease-in-out
+        infinite;
+    }
+
+
+    .target-dot {
+
+      width:
+        10px;
+
+      height:
+        10px;
+
+      border-radius:
+        50%;
+
+      background:
+        #ffad2f;
+
+      box-shadow:
+        0 0 12px
+        rgba(255,173,47,.9);
+    }
+
+
+    /* =========================================================
+       TARGET PULSE
+       
+       Only the size/opacity changes.
+       Position remains fixed.
+       ========================================================= */
+
+    @keyframes targetPulse {
+
+      0%,
+      100% {
+
+        transform:
+          scale(.96);
+
+        opacity:
+          .86;
+      }
+
+      50% {
+
+        transform:
+          scale(1.04);
+
+        opacity:
+          1;
+      }
+
+    }
+
+
+    /* =========================================================
+       SCANNER CORNERS
+       ========================================================= */
+
+    .corner {
+
+      position:
+        absolute;
+
+      z-index:
+        6;
+
+      width:
+        28px;
+
+      height:
+        28px;
+
+      border-color:
+        #eaf0f6;
+
+      opacity:
+        .9;
+    }
+
+
+    .corner.top-left {
+
+      top:
+        24px;
+
+      left:
+        24px;
+
+      border-top:
+        2px solid;
+
+      border-left:
+        2px solid;
+    }
+
+
+    .corner.top-right {
+
+      top:
+        24px;
+
+      right:
+        24px;
+
+      border-top:
+        2px solid;
+
+      border-right:
+        2px solid;
+    }
+
+
+    .corner.bottom-left {
+
+      bottom:
+        24px;
+
+      left:
+        24px;
+
+      border-bottom:
+        2px solid;
+
+      border-left:
+        2px solid;
+    }
+
+
+    .corner.bottom-right {
+
+      bottom:
+        24px;
+
+      right:
+        24px;
+
+      border-bottom:
+        2px solid;
+
+      border-right:
+        2px solid;
+    }
+
+
+    /* =========================================================
+       SCANNER FOOTER
+       ========================================================= */
+
+    .scanner-footer {
+
+      border-top:
+        1px solid #263746;
+
+      color:
+        #688097;
+    }
+
+
+    /* =========================================================
+       WORKFLOW SECTION
+       ========================================================= */
+
+    .workflow-section {
+
+      padding:
+        40px 0 64px;
+    }
+
+
+    .workflow-heading {
+
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        space-between;
+
+      gap:
+        30px;
+
+      margin-bottom:
+        24px;
+    }
+
+
+    .workflow-heading .eyebrow {
+
+      margin-bottom:
+        8px;
+    }
+
+
+    .workflow-heading h2 {
+
+      margin:
+        0;
+
+      font-size:
+        28px;
+
+      letter-spacing:
+        -.8px;
+    }
+
+
+    .workflow-heading > span {
+
+      color:
+        #678099;
+
+      font:
+        10px monospace;
+    }
+
+
+    .workflow-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        14px;
+    }
+
+
+    .workflow-card {
+
+      position:
+        relative;
+
+      min-height:
+        190px;
+
+      padding:
+        24px;
+
+      background:
+        #0c151f;
+
+      border:
+        1px solid #2b3d4f;
+
+      border-radius:
+        7px;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease;
+    }
+
+
+    .workflow-card:hover {
+
+      transform:
+        translateY(-3px);
+
+      border-color:
+        #42586d;
+    }
+
+
+    .workflow-number {
+
+      color:
+        #ffae27;
+
+      font:
+        700 12px monospace;
+    }
+
+
+    .workflow-line {
+
+      width:
+        36px;
+
+      height:
+        1px;
+
+      margin:
+        14px 0 20px;
+
+      background:
+        #ffae27;
+    }
+
+
+    .workflow-card h3 {
+
+      margin:
+        0 0 9px;
+
+      font-size:
+        16px;
+    }
+
+
+    .workflow-card p {
+
+      margin:
+        0;
+
+      color:
+        #7892ad;
+
+      font-size:
+        11px;
+
+      line-height:
+        1.7;
+    }
+
+
+    /* =========================================================
+       SYSTEM STRIP
+       ========================================================= */
+
+    .system-strip {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr
+        1px
+        1fr
+        1px
+        1fr;
+
+      align-items:
+        center;
+
+      gap:
+        24px;
+
+      padding:
+        26px 0;
+
+      border-top:
+        1px solid #243443;
+
+      border-bottom:
+        1px solid #243443;
+    }
+
+
+    .system-item {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        14px;
+    }
+
+
+    .system-icon {
+
+      color:
+        #ffae27;
+
+      font-size:
+        16px;
+    }
+
+
+    .system-item strong {
+
+      display:
+        block;
+
+      font:
+        700 10px monospace;
+
+      letter-spacing:
+        1px;
+    }
+
+
+    .system-item small {
+
+      display:
+        block;
+
+      margin-top:
+        5px;
+
+      color:
+        #6f859b;
+
+      font-size:
+        9px;
+    }
+
+
+    .system-divider {
+
+      width:
+        1px;
+
+      height:
+        34px;
+
+      background:
+        #2a3a49;
+    }
+
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+
+      padding:
+        22px 20px 30px;
+
+      text-align:
+        center;
+
+      color:
+        #4d6378;
+
+      font:
+        9px monospace;
+
+      letter-spacing:
+        .4px;
+    }
+
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
+    @media (max-width:900px) {
+
+      .topbar {
+
+        padding:
+          0 18px;
+
+        gap:
+          12px;
+      }
+
+
+      .brand {
+        min-width:
+          0;
+      }
+
+
+      .brand-text {
+        display:
+          none;
+      }
+
+
+      .status {
+        min-width:
+          auto;
+      }
+
+
+      .hero {
+
+        grid-template-columns:
+          1fr;
+
+        padding-top:
+          42px;
+      }
+
+
+      .hero-visual {
+
+        max-width:
+          720px;
+      }
+
+
+      .workflow-grid {
+
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .system-strip {
+
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .system-divider {
+
+        width:
+          100%;
+
+        height:
+          1px;
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width:600px) {
+
+      .home-container {
+
+        width:
+          min(
+            calc(100% - 28px),
+            1180px
+          );
+      }
+
+
+      .nav {
+        display:
+          none;
+      }
+
+
+      .status {
+
+        margin-left:
+          auto;
+      }
+
+
+      .hero-title {
+
+        font-size:
+          46px;
+
+        letter-spacing:
+          -2px;
+      }
+
+
+      .hero-kpis {
+
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .scanner-area {
+
+        height:
+          320px;
+      }
+
+
+      .workflow-heading {
+
+        display:
+          block;
+      }
+
+
+      .workflow-heading > span {
+
+        display:
+          block;
+
+        margin-top:
+          12px;
+      }
+
+
+      .hero-actions {
+
+        flex-wrap:
+          wrap;
+      }
+
+    }
+
+
+    /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+
+    @media (prefers-reduced-motion:reduce) {
+
+      .scanner-scanline,
+      .target-ring {
+
+        animation:
+          none;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="topbar">
+
+
+    <a
+      class="brand"
+      href="index.html"
+    >
+
+      <span class="brand-mark">
+        QC · 01
+      </span>
+
+
+      <div class="brand-text">
+
+        <h1>
+          DefectVision AI
+        </h1>
+
+        <small>
+          Multi-Model Surface Inspection
+        </small>
+
+      </div>
+
+    </a>
+
+
+    <nav class="nav">
+
+      <a
+        class="active"
+        href="index.html"
+      >
+        Home
+      </a>
+
+      <a
+        href="detection.html"
+      >
+        Detection
+      </a>
+
+      <a
+        href="about.html"
+      >
+        About
+      </a>
+
+    </nav>
+
+
+    <div class="status">
+
+      <span
+        id="statusDot"
+        class="dot"
+      ></span>
+
+      <span
+        id="statusText"
+      >
+        Checking backend…
+      </span>
+
+    </div>
+
+
+  </header>
+
+
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+  <main class="home-container">
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="hero">
+
+
+      <!-- LEFT SIDE -->
+
+      <div class="hero-copy">
+
+
+        <div class="eyebrow">
+          INDUSTRIAL VISION · QC SYSTEM
+        </div>
+
+
+        <h2 class="hero-title">
+
+          Inspect surfaces.<br>
+
+          <span>
+            Find defects.
+          </span>
+
+        </h2>
+
+
+        <p class="hero-description">
+
+          An intelligent inspection platform that automatically
+          evaluates every image with three CNN models, selects
+          the strongest result, and delivers explainable
+          surface-defect analysis.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+
+          <a
+            href="detection.html"
+            class="btn primary"
+          >
+
+            START INSPECTION
+
+            <span>
+              →
+            </span>
+
+          </a>
+
+
+          <a
+            href="about.html"
+            class="btn secondary"
+          >
+
+            HOW IT WORKS
+
+          </a>
+
+
+        </div>
+
+
+        <!-- KPI CARDS -->
+
+        <div class="hero-kpis">
+
+
+          <div class="kpi-card">
+
+            <div class="kpi-label">
+              CLASSIFICATION
+            </div>
+
+            <div class="kpi-value">
+              6 CLASSES
+            </div>
+
+            <div class="kpi-description">
+              Known defect recognition
+            </div>
+
+          </div>
+
+
+          <div class="kpi-card">
+
+            <div class="kpi-label">
+              ANOMALY
+            </div>
+
+            <div class="kpi-value">
+              VISUAL SCREEN
+            </div>
+
+            <div class="kpi-description">
+              Independent texture check
+            </div>
+
+          </div>
+
+
+          <div class="kpi-card">
+
+            <div class="kpi-label">
+              EXPLAINABILITY
+            </div>
+
+            <div class="kpi-value">
+              GRAD-CAM
+            </div>
+
+            <div class="kpi-description">
+              Model attention
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- RIGHT SIDE / SCANNER -->
+
+      <div class="hero-visual">
+
+
+        <div class="scanner-card">
+
+
+          <div class="scanner-header">
+
+            <span>
+              LIVE INSPECTION / SAMPLE 01
+            </span>
+
+            <span class="scanner-live">
+              ● LIVE
+            </span>
+
+          </div>
+
+
+          <!-- SCANNER -->
+
+          <div class="scanner-area">
+
+
+            <!-- Background grid -->
+
+            <div class="scanner-grid"></div>
+
+
+            <!--
+              FIXED HEAT SPOT
+              Stays exactly in the center.
+            -->
+
+            <div class="scanner-heat"></div>
+
+
+            <!--
+              MOVING SCAN LINE
+              This is the ONLY element that moves
+              vertically.
+            -->
+
+            <div class="scanner-scanline"></div>
+
+
+            <!--
+              FIXED TARGET
+              Stays in the center.
+            -->
+
+            <div class="scanner-center">
+
+              <div class="target-ring">
+
+                <div class="target-dot"></div>
+
+              </div>
+
+            </div>
+
+
+            <!-- Scanner corners -->
+
+            <div
+              class="corner top-left"
+            ></div>
+
+
+            <div
+              class="corner top-right"
+            ></div>
+
+
+            <div
+              class="corner bottom-left"
+            ></div>
+
+
+            <div
+              class="corner bottom-right"
+            ></div>
+
+
+          </div>
+
+
+          <div class="scanner-footer">
+
+            <span>
+              GRAD-CAM ACTIVE
+            </span>
+
+            <span>
+              LOCAL MODEL
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WORKFLOW
+         ===================================================== -->
+
+    <section class="workflow-section">
+
+
+      <div class="workflow-heading">
+
+
+        <div>
+
+          <div class="eyebrow">
+            INSPECTION PIPELINE
+          </div>
+
+          <h2>
+            Inspection workflow
+          </h2>
+
+        </div>
+
+
+        <span>
+          Automatic · explainable · local
+        </span>
+
+
+      </div>
+
+
+
+      <div class="workflow-grid">
+
+
+        <!-- STEP 01 -->
+
+        <article class="workflow-card">
+
+          <div class="workflow-number">
+            01
+          </div>
+
+          <div class="workflow-line"></div>
+
+          <h3>
+            Upload &amp; compare
+          </h3>
+
+          <p>
+
+            Upload a JPG or PNG sample.
+            ResNet18, MobileNetV2, and Custom CNN
+            inspect the same image automatically.
+
+          </p>
+
+        </article>
+
+
+
+        <!-- STEP 02 -->
+
+        <article class="workflow-card">
+
+          <div class="workflow-number">
+            02
+          </div>
+
+          <div class="workflow-line"></div>
+
+          <h3>
+            Analyze the result
+          </h3>
+
+          <p>
+
+            The strongest model is selected, then the
+            existing pipeline runs classification,
+            anomaly heatmap, severity, evidence consistency,
+            spatial profile, and Grad-CAM.
+
+          </p>
+
+        </article>
+
+
+
+        <!-- STEP 03 -->
+
+        <article class="workflow-card">
+
+          <div class="workflow-number">
+            03
+          </div>
+
+          <div class="workflow-line"></div>
+
+          <h3>
+            Export inspection
+          </h3>
+
+          <p>
+
+            Review the complete visual evidence and export
+            the final inspection report with the selected
+            model and results.
+
+          </p>
+
+        </article>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SYSTEM FEATURES
+         ===================================================== -->
+
+    <section class="system-strip">
+
+
+      <!-- LOCAL INFERENCE -->
+
+      <div class="system-item">
+
+        <span class="system-icon">
+          ●
+        </span>
+
+        <div>
+
+          <strong>
+            LOCAL INFERENCE
+          </strong>
+
+          <small>
+            Images remain on the local system
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="system-divider"></div>
+
+
+      <!-- MULTI MODEL -->
+
+      <div class="system-item">
+
+        <span class="system-icon">
+          ◈
+        </span>
+
+        <div>
+
+          <strong>
+            MULTI-MODEL AI
+          </strong>
+
+          <small>
+            Three CNN models automatically compared
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="system-divider"></div>
+
+
+      <!-- EVIDENCE -->
+
+      <div class="system-item">
+
+        <span class="system-icon">
+          ✓
+        </span>
+
+        <div>
+
+          <strong>
+            EVIDENCE VALIDATION
+          </strong>
+
+          <small>
+            Intervention-based consistency test
+          </small>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+
+    DefectVision AI · Multi-Model Surface Inspection ·
+    Local inference via FastAPI
+
+  </footer>
+
+
+
+  <!-- =======================================================
+       EXISTING JAVASCRIPT
+       ======================================================= -->
+
+  <script src="js/app.js"></script>
+
+
+</body>
+
+</html>
