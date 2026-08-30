@@ -41,6 +41,7 @@ Spatial Profile
 Grad-CAM
      ↓
 Export Report
+```
 
 ## Run on Windows
 
@@ -52,7 +53,6 @@ python -m venv venv
 pip install -r requirements.txt
 python -m uvicorn main:app --host 0.0.0.0 --port 8000
 ```
-
 Then open:
 
 `http://localhost:8000/`
