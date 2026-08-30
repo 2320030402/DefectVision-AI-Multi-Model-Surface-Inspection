@@ -1,20 +1,46 @@
-# Industrial Surface Defect Intelligence — Complete Full-Stack Project
+# DefectVision AI — Multi-Model Surface Inspection
 
-Full-stack local inspection project. The application has **three UI pages**: Home, Detection, and About. There is **no separate Results page**; all inspection results are rendered directly inside Detection.
+DefectVision AI is an AI-based industrial surface defect inspection system.
 
-## Implemented features
+It checks a surface image using three different deep learning models and automatically selects the best model. It also provides visual explanations and additional inspection information.
 
-The Detection page presents the complete inspection pipeline in one scrollable result panel. The independent anomaly screen is intentionally placed directly after the classifier probability distribution so it is visible as a first-class inspection stage.
+## Features
 
-1. **Six-class defect classification** using the included ResNet18, MobileNetV2 and Custom CNN checkpoints.
-2. **Independent visual anomaly screening** using a training-free robust local texture-residual + gradient method. The score is based on extreme-response strength and anomalous area rather than a forced top-percentile score. It reports a screening score, unusual-area percentage, status, standalone anomaly heatmap, and heatmap overlay.
-3. **Grad-CAM explainability** for the selected model and predicted class.
-4. **Evidence Consistency Test**: preserves the Grad-CAM evidence region, suppresses it in a second image, reruns the classifier, and reports original/preserved/removed confidence plus an experimental consistency score.
-5. **Spatial Evidence Profile**: combines Grad-CAM attention with the independent anomaly response to report evidence pattern, approximate location, area and orientation, with a spatial profile overlay. The outline is an inspection visualization, not a pixel-accurate defect mask.
-6. **Single-page detection workflow**: upload → classify → anomaly screen → explain → validate → spatial profile.
-7. **Three model choices**: `resnet18`, `mobilenet_v2`, `custom_cnn`.
-8. **Backend health indicator** showing CPU/GPU availability.
-9. **FastAPI serves the frontend**, so only one local server is required.
+- Automatic inspection using 3 AI models:
+  - ResNet18
+  - MobileNetV2
+  - Custom CNN
+- Six-class surface defect classification
+- Automatic best-model selection
+- Anomaly heatmap
+- Severity and priority assessment
+- Grad-CAM visualization
+- Evidence consistency check
+- Spatial evidence profile
+- Complete class probability results
+- Inspection report export
+- Backend health status
+
+## Inspection Workflow
+
+```text
+Upload Image
+     ↓
+3 Model Classification
+     ↓
+Select Best Model
+     ↓
+Anomaly Heatmap
+     ↓
+Severity / Priority
+     ↓
+Evidence Consistency
+     ↓
+Spatial Profile
+     ↓
+Grad-CAM
+     ↓
+Export Report
 
 ## Run on Windows
 
@@ -31,7 +57,13 @@ Then open:
 
 `http://localhost:8000/`
 
-Do **not** open the HTML files directly from File Explorer.
+## Deployment
+
+The application is deployed using Render.
+
+Live application:
+
+`https://defectvision-ai-multi-model-surface-94kz.onrender.com`
 
 ## Checkpoints
 
@@ -45,15 +77,8 @@ The included files are:
 
 The anomaly detector is an **independent visual screening layer**, not a trained/calibrated anomaly probability model. The evidence-consistency score is also an experimental intervention metric. These should be presented as inspection aids unless they are further validated experimentally.
 
-
-## Team members
-- T. Nishkha — 2320030139 — Frontend & UI Developer
-- PLV. Abhiram — 2320030294 — Backend & API Developer
-- G. SaiAbhiRam Reddy — 2320030402 — Machine Learning & Computer Vision Developer
-
 ## Anomaly heatmap
 The `/predict` response now exposes the anomaly heatmap both inside `anomaly_detection` and as backward-compatible top-level fields. The frontend renders both the standalone anomaly heatmap and the heatmap overlay separately from Grad-CAM.
-
 
 ## Added feature: Severity & Priority Assessment
 
@@ -74,5 +99,22 @@ The generated HTML can be printed/saved as PDF directly from the browser. No ext
 ## Automatic 3-Model Inspection
 
 The Detection station now runs each uploaded image through all three registered CNN checkpoints automatically: ResNet18, MobileNetV2, and Custom CNN. Their predicted class, confidence, and project-defined selection score are displayed in a three-model benchmark. The highest-scoring model becomes the selected model for the detailed inspection pipeline (Grad-CAM, evidence consistency, spatial evidence, severity/priority) and for the exported inspection report.
+
+## Team members
+- T. Nishkha — 2320030139 — Frontend & UI Developer
+- PLV. Abhiram — 2320030294 — Backend & API Developer
+- G. SaiAbhiRam Reddy — 2320030402 — Machine Learning & Computer Vision Developer
+
+## Future Improvements
+-Improve model accuracy
+-Add more defect classes
+-Add larger datasets
+-Improve anomaly detection
+-Add batch image inspection
+-Improve report generation
+-Add inspection history
+-Add database support
+-Improve cloud performance
+
 
 The selection score is a project-specific ranking aid based primarily on classification confidence with a modest consensus bonus. It is not a calibrated probability of model correctness.
