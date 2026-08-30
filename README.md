@@ -106,15 +106,12 @@ The Detection station now runs each uploaded image through all three registered 
 - G. SaiAbhiRam Reddy — 2320030402 — Machine Learning & Computer Vision Developer
 
 ## Future Improvements
--Improve model accuracy
--Add more defect classes
--Add larger datasets
--Improve anomaly detection
--Add batch image inspection
--Improve report generation
--Add inspection history
--Add database support
--Improve cloud performance
-
-
-The selection score is a project-specific ranking aid based primarily on classification confidence with a modest consensus bonus. It is not a calibrated probability of model correctness.
+- Improve model accuracy
+- Add more defect classes
+- Add larger datasets
+- Improve anomaly detection
+- Add batch image inspection
+- Improve report generation
+- Add inspection history
+- Add database support
+- Improve cloud performance
